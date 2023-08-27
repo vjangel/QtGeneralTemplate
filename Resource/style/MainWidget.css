@@ -1,0 +1,8 @@
+QWidget#MainWidgetBackgroundWidget {
+    background-image: url(":/img/background.png");
+
+}
+
+QWidget#MainWidgetShadeWidget {
+    background-color: rgba(0, 0, 0, 50);
+}
