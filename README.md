@@ -7,6 +7,7 @@
 ```
 +-- CMakeLists.txt
 +-- compile.bat
++-- deploy.bat
 +-- Profile.pri
 +-- QtGeneralTemplate.pro
 +-- Src\
@@ -23,6 +24,11 @@
 |   |   +-- Universal
 |   |   +-- Universal.pri
 |   |   +-- Universal.hpp
+|   +-- thirdparty\
+|   |   +-- qcustomplot\
+|   |   |   +-- CMakeLists.txt
+|   |   |   +-- qcustomplot.h
+|   |   |   +-- qcustomplot.cpp
 +-- Resource\
 |   +-- Resource.qrc
 |   +-- updateInfo.txt
@@ -35,18 +41,18 @@
 
 ```
 
-## Used(Windows)
+## Usage(Windows)
 
 * Build with QMake
 ```bash
 $ ./compile.bat
-$ ./build/xxx.exe
+$ ./build/release/QtGeneralTemplate.exe
 ```
 
 * Build with CMake
-```shell
+```bash
 $ mkdir build
 $ cd build
 $ cmake .. && cmake --build . --target all
-$ ./build/bin/xxx.exe
+$ ./build/bin/QtGeneralTemplate.exe
 ```

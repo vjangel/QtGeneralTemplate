@@ -3,7 +3,9 @@
 #include <QObject>
 #include <QDateTime>
 #include <QTime>
+#include <QTimer>
 #include <QVector>
+#include <QAbstractButton>
 #include <QList>
 #include <QCoreApplication>
 #include <QStringList>
@@ -138,6 +140,15 @@ inline  bool isLittelEndian() {
 }
 
 
+bool oneButton(QAbstractButton *btn, int msec)
+{
+    if(nullptr != btn) return false;
+    if(msec <= 0) return false;
+
+    btn->setEnabled(false);
+    QTimer::singleShot(msec, [btn](){ btn->setEnabled(true); });
+    return true;
+}
 
 
 
