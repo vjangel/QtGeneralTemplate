@@ -8,6 +8,7 @@
 #include <QAbstractButton>
 #include <QList>
 #include <QCoreApplication>
+#include <QRandomGenerator>
 #include <QStringList>
 
 
@@ -140,16 +141,35 @@ inline  bool isLittelEndian() {
 }
 
 
-bool oneButton(QAbstractButton *btn, int msec)
+bool oneButton(QAbstractButton *btn, const int msec, const QString& tipText=nullptr, bool recover=true)
 {
-    if(nullptr != btn) return false;
+    if(nullptr == btn) return false;
     if(msec <= 0) return false;
 
     btn->setEnabled(false);
-    QTimer::singleShot(msec, [btn](){ btn->setEnabled(true); });
+    auto oldStr = btn->text();
+    if(!tipText.isNull()) btn->setText(tipText);
+    QTimer::singleShot(msec, [=](){ btn->setEnabled(true);  if(recover) btn->setText(oldStr);});
     return true;
 }
 
+inline const QString generateRandomString(const uint length)
+{
+    QString str;
+    auto randomGenerator = QRandomGenerator::system();
+
+    for (uint i = 0; i < length; i++)
+    {
+        int value = randomGenerator->bounded(62);
+        char nextChar;
+
+        if(value < 10) nextChar = '0' + value;
+        else if(value < 36) nextChar = 'A' + value  - 10;
+        else nextChar = 'a' + value  - 36;
+        str.append(nextChar);
+    }
+    return str;
+}
 
 
 }

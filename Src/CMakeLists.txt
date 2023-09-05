@@ -26,3 +26,5 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
 
     # WIN32_EXECUTABLE TRUE
 )
+
+# target_include_directories(MainWidget PRIVATE Universal)
