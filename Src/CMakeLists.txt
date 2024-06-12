@@ -11,6 +11,7 @@ add_executable(${CMAKE_PROJECT_NAME}
 
 set(MODULE_LISTS
     MainWidget
+    SaveLog
     Universal
 )
 AddModule(MODULE_LISTS)

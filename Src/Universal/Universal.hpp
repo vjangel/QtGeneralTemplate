@@ -1,5 +1,6 @@
 #ifndef UNIVERSAL_HPP
 #define UNIVERSAL_HPP
+
 #include <QObject>
 #include <QDateTime>
 #include <QTime>
@@ -8,27 +9,32 @@
 #include <QAbstractButton>
 #include <QList>
 #include <QCoreApplication>
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #include <QRandomGenerator>
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+#include <QRegularExpression>
+#endif
 #include <QStringList>
 
 
-namespace UNIVERSAL
-{
+namespace UNIVERSAL {
 
 #define CURR_DATE_TIME QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss:zzz")
 
-const QString m_none_SheetStyle = "min-width: %3px; \
-                                   min-height: %3px; \
-                                   max-width: %3px; \
-                                   max-height: %3px;\
-                                   border-radius: %2px; \
-                                   border:1px solid black; \
+const QString m_none_SheetStyle = "min-width: %2px; \
+                                   min-height: %2px; \
+                                   max-width: %2px; \
+                                   max-height: %2px;\
+                                   border-radius: %3px; \
+                                   border:1px solid %4; \
                                    background:%1";
-const QString m_red_SheetStyle = m_none_SheetStyle.arg("red").arg(8).arg(16);
-const QString m_green_SheetStyle = m_none_SheetStyle.arg("#06b025").arg(8).arg(16);
 
-enum BIG_LITTLE
-{
+inline const QString setCircleStyle(const QString& color, int dia, int border=1) {
+    return m_none_SheetStyle.arg(color).arg(dia).arg(dia/2).arg(border);
+}
+
+enum ENDIAN {
     BIG         ,   //大端
     LITTLE      ,   //小端
     BIG_SWAP    ,   //大端-交换
@@ -40,7 +46,7 @@ inline const QString redSheetStyle(uint a, uint b) {
 }
 
 inline const QString greenSheetstyle(uint a, uint b) {
-    return m_none_SheetStyle.arg("06b025").arg(a).arg(b);
+    return m_none_SheetStyle.arg("#06b025").arg(a).arg(b);
 }
 
 inline const QString whiteSheetstyle(uint a, uint b) {
@@ -49,8 +55,7 @@ inline const QString whiteSheetstyle(uint a, uint b) {
 
 inline void MSleep(int msec) {
     QTime dieTime = QTime::currentTime().addMSecs(msec);
-    while (QTime::currentTime() < dieTime)
-    {
+    while (QTime::currentTime() < dieTime) {
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     }
 }
@@ -87,7 +92,6 @@ inline float getLittleFloat(quint32 u32) {
     quint16 l16 = u32 >> 0x10;
     return getLittleFloat(h16, l16);
 }
-
 inline float getLittleSwapFloat(quint16 h16, quint16 l16) {
     return getFloat(h16, l16, 2,3,0,1);
 }
@@ -106,7 +110,6 @@ inline float getBigFloat(quint32 u32) {
     quint16 l16 = u32 & 0xFFFF;
     return getBigFloat(h16, l16);
 }
-
 inline float getBigSwapFloat(quint16 h16, quint16 l16) {
     return getFloat(h16, l16, 1,0,3,2);
 }
@@ -119,17 +122,17 @@ inline float getBigSwapFloat(quint32 u32) {
 
 //转32位浮点数  Big Big-Swap Littel  Littel-S
 //             0     1        2       3
-inline const QList<float> toFloatDatas(QVector<quint16> datas, BIG_LITTLE model) {
+inline const QList<float> toFloatDatas(QVector<quint16> datas, ENDIAN model) {
     QList<float> fList;
 
     if(0 != datas.size() % 2) return fList;
     for(int i = 0; i < datas.size(); i+=2)
     {
         float f;
-        if(BIG_LITTLE::BIG == model)            f = UNIVERSAL::getBigFloat(datas.at(i), datas.at(i+1));
-        else if(BIG_LITTLE::BIG_SWAP == model)  f = UNIVERSAL::getBigSwapFloat(datas.at(i), datas.at(i+1));
-        else if(BIG_LITTLE::LITTLE == model)    f = UNIVERSAL::getLittleFloat(datas.at(i), datas.at(i+1));
-        else                                    f = UNIVERSAL::getLittleSwapFloat(datas.at(i), datas.at(i+1));
+        if(ENDIAN::BIG == model)            f = UNIVERSAL::getBigFloat(         datas.at(i), datas.at(i+1));
+        else if(ENDIAN::BIG_SWAP == model)  f = UNIVERSAL::getBigSwapFloat(     datas.at(i), datas.at(i+1));
+        else if(ENDIAN::LITTLE == model)    f = UNIVERSAL::getLittleFloat(      datas.at(i), datas.at(i+1));
+        else                                f = UNIVERSAL::getLittleSwapFloat(  datas.at(i), datas.at(i+1));
 
         fList << f;
     }
@@ -141,8 +144,7 @@ inline  bool isLittelEndian() {
 }
 
 
-bool oneButton(QAbstractButton *btn, const int msec, const QString& tipText=nullptr, bool recover=true)
-{
+inline bool oneButton(QAbstractButton *btn, const int msec, const QString& tipText=nullptr, bool recover=true) {
     if(nullptr == btn) return false;
     if(msec <= 0) return false;
 
@@ -153,26 +155,63 @@ bool oneButton(QAbstractButton *btn, const int msec, const QString& tipText=null
     return true;
 }
 
-inline const QString generateRandomString(const uint length)
-{
+inline const QString generateRandomString(const uint length) {
     QString str;
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     auto randomGenerator = QRandomGenerator::system();
+#else
+    qsrand(QDateTime::currentMSecsSinceEpoch());
+#endif
 
-    for (uint i = 0; i < length; i++)
-    {
+    for (uint i = 0; i < length; i++) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
         int value = randomGenerator->bounded(62);
+#else
+        int value = qrand() % 62;
+#endif
         char nextChar;
 
-        if(value < 10) nextChar = '0' + value;
+        if(value < 10)      nextChar = '0' + value;
         else if(value < 36) nextChar = 'A' + value  - 10;
-        else nextChar = 'a' + value  - 36;
+        else                nextChar = 'a' + value  - 36;
         str.append(nextChar);
     }
     return str;
 }
 
-
+inline bool setRetainSizeHide(QWidget* w, bool b) {
+    if(!w) return false;
+    auto p = w->sizePolicy();
+    p.setRetainSizeWhenHidden(b);
+    w->setSizePolicy(p);
+    return true;
 }
 
+inline QString simplityNumStr(const QString& str, bool *ok = nullptr) {
+    QString s;
+    bool b;
+    if(str.isEmpty() || str.isNull()) {
+        if(ok) *ok = false;
+        return s;
+    }
 
-#endif // UNIVERSAL_H
+    auto d = str.toDouble(&b);
+    if(!b) {
+        if(ok) *ok = false;
+        return s;
+    }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+    QRegularExpression rx("(\\.){0,1}0+$");
+#else
+    QRegExp rx;
+    rx.setPattern("(\\.){0,1}0+$");
+#endif
+    s = QString("%1").arg(d,0,'f',-1).replace(rx,"");
+    return s;
+}
+
+}   //namespcae UNIVERSAL
+
+
+#endif // UNIVERSAL_HPP
