@@ -1,7 +1,5 @@
-QT          += core gui network
+QT          += core
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-INCLUDEPATH += $$PWD
 
 HEADERS     += \
 
@@ -13,4 +11,5 @@ RESOURCES   += \
 
 include($$PWD/Universal/Universal.pri)
 include($$PWD/MainWidget/MainWidget.pri)
+include($$PWD/SaveLog/SaveLog.pri)
 # include($$PWD/SingleApplication/SingleApplication.pri)

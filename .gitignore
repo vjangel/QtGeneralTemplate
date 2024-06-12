@@ -99,9 +99,17 @@ CMakeLists.txt.user*
 # QtCreator local machine specific files for imported projects
 *creator.user*
 
+
+
 *_qmlcache.qrc
 
 # End of https://www.toptal.com/developers/gitignore/api/cmake,qt,c++,qml
 
 # build
 /build
+
+# Qt clangd
+.qtc_clangd/
+
+# vs code
+.vscode

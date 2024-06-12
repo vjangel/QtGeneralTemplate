@@ -37,6 +37,9 @@
 |   +-- img\
 |   |   +-- background.png
 |   +-- video\
++-- dependent\
+|   +-- font\
+|   |   +--  myfont.ttf
 
 
 ```

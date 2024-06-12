@@ -14,12 +14,10 @@ public:
     explicit MainWidget(QWidget *p=nullptr);
     ~MainWidget();
 
+private:
     void InitUi();
-    
     void InitObject();
-
     void InitConnect();
-
     void InitProperty();
 
 public slots:
@@ -27,7 +25,6 @@ public slots:
 
 signals:
 
-private slots:
 
 
 private:

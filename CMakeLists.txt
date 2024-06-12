@@ -34,4 +34,4 @@ unset(CUSTOM_NAME)
 add_subdirectory(Src)
 
 # custom dependent
-# file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/dependent/" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/dependent/" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
