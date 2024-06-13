@@ -16,6 +16,8 @@
 #include <QRegularExpression>
 #endif
 #include <QStringList>
+#include <QDateTime>
+#include <QDebug>
 
 
 namespace UNIVERSAL {
@@ -210,6 +212,23 @@ inline QString simplityNumStr(const QString& str, bool *ok = nullptr) {
     s = QString("%1").arg(d,0,'f',-1).replace(rx,"");
     return s;
 }
+
+inline QDebug DEBUG(const QString &format = "yyyy-MM-dd hh:mm:ss:zzz") {
+    return qDebug() << "[" << QDateTime::currentDateTime().toString(format) << "] ";
+}
+
+inline QDebug INFO(const QString &format = "yyyy-MM-dd hh:mm:ss:zzz") {
+    return qInfo() << "[" << QDateTime::currentDateTime().toString(format) << "] ";
+}
+
+inline QDebug WARNING(const QString &format = "yyyy-MM-dd hh:mm:ss:zzz") {
+    return qWarning() << "[" << QDateTime::currentDateTime().toString(format) << "] ";
+}
+
+inline QDebug CRITICAL(const QString &format = "yyyy-MM-dd hh:mm:ss:zzz") {
+    return qCritical() << "[" << QDateTime::currentDateTime().toString(format) << "] ";
+}
+
 
 }   //namespcae UNIVERSAL
 
