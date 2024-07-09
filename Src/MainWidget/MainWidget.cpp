@@ -3,6 +3,9 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+#include <Universal>
+
+using namespace UNIVERSAL;
 
 MainWidget::MainWidget(QWidget *p)
     :QWidget{p}
@@ -21,7 +24,7 @@ MainWidget::~MainWidget()
 void MainWidget::InitUi()
 {
     setObjectName("MainWidget");
-    setWindowTitle(tr("QtGeneralTemplate"));
+    setWindowTitle(tr("SyncNtpTimeClient"));
     resize(400,400);
 
     auto rootLayout = new QHBoxLayout(this);
@@ -70,6 +73,6 @@ void MainWidget::InitProperty()
         setStyleSheet(qss.readAll());
         qss.close();
     }
-    else qWarning() << "[ERROR] style load failed!";
+    else WARNING() << "[ERROR] style load failed!";
 }
 

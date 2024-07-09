@@ -8,12 +8,14 @@
 #include <QDateTime>
 
 #include "SaveLog.h"
+#include <Universal>
+
+using namespace UNIVERSAL;
 
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
-    qDebug() << "[" << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss:zzz") << "] "
-                << "[Application] [Start] \"Program\"";
+    DEBUG() << "[Application] [Start] \"Program\"";
 
     if((qApp->arguments().size() >= 1) && qApp->arguments().contains("--log")) {
 #ifdef LOG_MODULE
@@ -36,8 +38,7 @@ int main(int argc, char* argv[])
         QFont font(fontName);
         QApplication::setFont(font);
     } else {
-        qDebug() << "[" << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss:zzz") << "] "
-                    << "[Application] [Font] WARNING: font load failed!";
+        DEBUG() << "[Application] [Font] WARNING: font load failed!";
     }
 
 
