@@ -24,7 +24,7 @@ MainWidget::~MainWidget()
 void MainWidget::InitUi()
 {
     setObjectName("MainWidget");
-    setWindowTitle(tr("SyncNtpTimeClient"));
+    setWindowTitle(tr("QtGeneralTemplate"));
     resize(400,400);
 
     auto rootLayout = new QHBoxLayout(this);
