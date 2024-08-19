@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/background.png</file>
+        <file>style/VAbstractWidget.css</file>
+    </qresource>
+</RCC>

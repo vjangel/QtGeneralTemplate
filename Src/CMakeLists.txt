@@ -10,11 +10,12 @@ add_executable(${CMAKE_PROJECT_NAME}
 )
 
 set(MODULE_LISTS
-    MainWidget
     SaveLog
     Universal
 )
 AddModule(MODULE_LISTS)
+
+add_subdirectory(UI)
 
 set(QT_COMPONENTS
     Core
@@ -28,4 +29,5 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
     # WIN32_EXECUTABLE TRUE
 )
 
-target_include_directories(MainWidget PRIVATE Universal)
+target_include_directories(MainWidget PRIVATE Universal VAbstractWidget)
+target_include_directories(VAbstractWidget PRIVATE Universal)

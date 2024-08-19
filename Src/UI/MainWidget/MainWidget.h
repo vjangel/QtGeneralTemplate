@@ -1,15 +1,12 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
-#include <QWidget>
-#include <QDebug>
-#include <QFile>
-#include <QFrame>
+#include <VAbstractWidget>
 
-
-class MainWidget : public QWidget
+class MainWidget : public VAbstractWidget
 {
     Q_OBJECT
+    ABSTRACT_CLASSNAME
 public:
     explicit MainWidget(QWidget *p=nullptr);
     ~MainWidget();
@@ -18,7 +15,6 @@ private:
     void InitUi();
     void InitObject();
     void InitConnect();
-    void InitProperty();
 
 public slots:
 

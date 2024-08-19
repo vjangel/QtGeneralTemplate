@@ -5,41 +5,68 @@
   
 ## Tree directory
 ```
-+-- CMakeLists.txt
-+-- compile.bat
-+-- deploy.bat
-+-- Profile.pri
-+-- QtGeneralTemplate.pro
-+-- Src\
-|   +-- CMakeLists.txt
-|   +-- Src.pri
-|   +-- main.cpp
-|   +-- MainWidget\
-|   |   +-- CMakeLists.txt
-|   |   +-- MainWidget.pri
-|   |   +-- MainWidget.cpp
-|   |   +-- MainWidget.h
-|   +-- Universal\
-|   |   +-- CMakeLists.txt
-|   |   +-- Universal
-|   |   +-- Universal.pri
-|   |   +-- Universal.hpp
-|   +-- thirdparty\
-|   |   +-- qcustomplot\
-|   |   |   +-- CMakeLists.txt
-|   |   |   +-- qcustomplot.h
-|   |   |   +-- qcustomplot.cpp
-+-- Resource\
-|   +-- Resource.qrc
-|   +-- updateInfo.txt
-|   +-- style\
-|   |   +-- MainWidget.css
-|   +-- img\
-|   |   +-- background.png
-|   +-- video\
-+-- dependent\
-|   +-- font\
-|   |   +--  myfont.ttf
+QtGeneralTemplate
+├─ cmakes\
+│  ├─ buildDefaults.cmake
+│  └─ LinkQtComponents.cmake
+├─ dependent\
+│  └─ font
+│     └─ myfont.ttf
+├─ Resource\
+│  ├─ img\
+│  │  └─ background.png
+│  ├─ style\
+│  │  └─ MainWidget.css
+│  ├─ Resource.qrc
+│  └─ updateInfo.txt
+├─ Src\
+│  ├─ SaveLog\
+│  │  ├─ CMakeLists.txt
+│  │  ├─ SaveLog.cpp
+│  │  ├─ SaveLog.h
+│  │  └─ SaveLog.pri
+│  ├─ thirdparty\
+│  │  └─ qcustomplot\
+│  │     ├─ CMakelists.txt
+│  │     ├─ qcustomplot.cpp
+│  │     └─ qcustomplot.h
+│  ├─ UI\
+│  │  ├─ MainWidget\
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ MainWidget.cpp
+│  │  │  ├─ MainWidget.h
+│  │  │  └─ MainWidget.pri
+│  │  ├─ VAbstractWidget\
+│  │  │  ├─ Resources\
+│  │  │  │  ├─ git\
+│  │  │  │  ├─ img\
+│  │  │  │  │  └─ background.png
+│  │  │  │  ├─ media\
+│  │  │  │  ├─ style\
+│  │  │  │  │  └─ VAbstractWidget.css
+│  │  │  │  └─ VAbstractWidget.qrc
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ VAbstractWidget
+│  │  │  ├─ VAbstractWidget.cpp
+│  │  │  ├─ VAbstractWidget.h
+│  │  │  └─ VAbstractWidget.pri
+│  │  ├─ CMakeLists.txt
+│  │  └─ UI.pri
+│  ├─ Universal\
+│  │  ├─ CMakeLists.txt
+│  │  ├─ Universal
+│  │  ├─ Universal.hpp
+│  │  └─ Universal.pri
+│  ├─ CMakeLists.txt
+│  ├─ main.cpp
+│  └─ Src.pri
+├─ CMakeLists.txt
+├─ compile.bat
+├─ deploy.bat
+├─ LICENSE
+├─ Profile.pri
+├─ QtGeneralTemplate.pro
+└─ README.md
 
 
 ```
