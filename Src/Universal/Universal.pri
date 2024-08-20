@@ -1,6 +1,7 @@
 QT          += core 
 
-INCLUDEPATH += $$PWD 
+INCLUDEPATH += $$PWD
+DEPENDPATH  += $$PWD
 
 SOURCES += \
 

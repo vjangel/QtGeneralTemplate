@@ -10,6 +10,6 @@ RESOURCES   += \
     $$PWD/../Resource/Resource.qrc
 
 include($$PWD/Universal/Universal.pri)
-include($$PWD/MainWidget/MainWidget.pri)
+include($$PWD/UI/UI.pri)
 include($$PWD/SaveLog/SaveLog.pri)
 # include($$PWD/SingleApplication/SingleApplication.pri)
